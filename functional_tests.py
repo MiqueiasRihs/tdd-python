@@ -1,34 +1,43 @@
 from selenium import webdriver
+import unittest
 
-browser = webdriver.Firefox()
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
 
-# Edith ouviu falar de uma nova aplicacao online interresante para
-# lista de tarefas. Ela decide verificar sua homepage
-browser.get('http://localhost:8000')
+    def tearDown(self):
+        self.browser.quit()
 
-# Ela percebe que o titulo da pagina é o cabeçalho mencionam listas de 
-# tarefas (to-do)
-assert 'To-Do' in browser.title
+    def test_can_start_a_list_and_retriever_it_later(self):
+        # Edith ouviu falar de uma nova aplicacao online interresante para
+        # lista de tarefas. Ela decide verificar sua homepage
+        self.browser.get('http://localhost:8000')
 
-# Ela é convidada a inserir um item de tarefa imediatamente
-# Ela digita "Buy peacock feathers" (Comprar apenas de pavão) em uma caixa
-# de texto (o hobby de Edith é fazer iscas para pesca com fly)
+        # Ela percebe que o titulo da pagina é o cabeçalho mencionam listas de 
+        # tarefas (to-do)
+        self.assertIn('To-Do', self.browser.title)
+        self.fail('Finish the test!')
 
-# Quando ela tecla enter, a pagina é atualizada, e agora a pagina lista
-# "1: Buy peacock feathers como um item a sua lista de tarefas"
+        # Ela é convidada a inserir um item de tarefa imediatamente
+        # Ela digita "Buy peacock feathers" (Comprar apenas de pavão) em uma caixa
+        # de texto (o hobby de Edith é fazer iscas para pesca com fly)
 
-# Ainda continua havendo uma caixa de texto convidando-a a acrescentar outro
-# item. Ela insere "Use peacock feathers to make a fly" (Usar penas de pavão
-# para fazer um fly-Edith é bem metodica)
+        # Quando ela tecla enter, a pagina é atualizada, e agora a pagina lista
+        # "1: Buy peacock feathers como um item a sua lista de tarefas"
 
-# A pagina é atualizada novamente e agora mostra os dois itens em sua lista
+        # Ainda continua havendo uma caixa de texto convidando-a a acrescentar outro
+        # item. Ela insere "Use peacock feathers to make a fly" (Usar penas de pavão
+        # para fazer um fly-Edith é bem metodica)
 
-# Edith se pergunta se o site lembrará de sua lista. Então ela nota
-# que o site gerou um URL unico para ela -- há um pequeno
-# texto explicativo para isso.
+        # A pagina é atualizada novamente e agora mostra os dois itens em sua lista
 
-# Ela acessa esse URL - sua lista de tarefas continua lá.
+        # Edith se pergunta se o site lembrará de sua lista. Então ela nota
+        # que o site gerou um URL unico para ela -- há um pequeno
+        # texto explicativo para isso.
 
-# Satisfeita ela volta a dormir
+        # Ela acessa esse URL - sua lista de tarefas continua lá.
 
-browser.quit()
+        # Satisfeita ela volta a dormir
+
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
